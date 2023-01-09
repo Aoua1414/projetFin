@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 @Entity
 @Table(name = "users", 
     uniqueConstraints = { 
@@ -24,9 +25,10 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  /*
   @NotBlank
   @Size(max = 20)
-  private String nom_prenom;
+  private String nom_prenom;*/
 
   @NotBlank
   @Size(max = 20)
@@ -53,9 +55,9 @@ public class User {
   public User() {
   }
 
-  public User(String nom_prenom, String numero, String password) {
-    this.nom_prenom = nom_prenom;
-    this.numero = numero;
+  public User( String username, String password) {
+    //this.nom_prenom = nom_prenom;
+    this.username = username;
     this.password = password;
   }
 
@@ -67,13 +69,13 @@ public class User {
     this.id = id;
   }
 
-  public String getNom_prenom() {
-    return nom_prenom;
-  }
+  //public String getNom_prenom() {
+  //  return nom_prenom;
+//  }
 
-  public void setNom_prenom(String username) {
-    this.nom_prenom = nom_prenom;
-  }
+ // public void setNom_prenom(String username) {
+  //  this.nom_prenom = nom_prenom;
+  //}
 
   public String getNumero() {
     return numero;

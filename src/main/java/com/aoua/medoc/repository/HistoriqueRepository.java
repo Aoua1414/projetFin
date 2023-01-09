@@ -1,4 +1,7 @@
 package com.aoua.medoc.repository;
 
-public interface HistoriqueRepository {
+import com.aoua.medoc.models.Historique;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HistoriqueRepository extends JpaRepository <Historique, Long> {
 }

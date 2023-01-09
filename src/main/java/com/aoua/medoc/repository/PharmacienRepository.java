@@ -1,4 +1,7 @@
 package com.aoua.medoc.repository;
 
-public interface PharmacienRepository {
+import com.aoua.medoc.models.Pharmacien;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PharmacienRepository extends JpaRepository <Pharmacien, Long> {
 }

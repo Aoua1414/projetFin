@@ -1,11 +1,19 @@
 package com.aoua.medoc.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Traitement {
     @Id
@@ -22,7 +30,7 @@ public class Traitement {
     private int intervalle;
 
     @ManyToOne
-    Historique historique;
+   private Historique historique;
 
 
 }
