@@ -1,25 +1,28 @@
 package com.aoua.medoc.security.services;
 
+
+
+import com.aoua.medoc.models.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.aoua.medoc.models.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
   private Long id;
-
+  private String email;
   private String username;
 
-  private String email;
+  private String nom_prenom;
+
+  private String numero;
 
   @JsonIgnore
   private String password;
@@ -29,8 +32,8 @@ public class UserDetailsImpl implements UserDetails {
   public UserDetailsImpl(Long id, String username, String email, String password,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
-    this.username = username;
-    this.email = email;
+    this.nom_prenom = nom_prenom;
+    this.numero = numero;
     this.password = password;
     this.authorities = authorities;
   }
@@ -42,9 +45,9 @@ public class UserDetailsImpl implements UserDetails {
 
     return new UserDetailsImpl(
         user.getId(), 
-        user.getUsername(), 
-        user.getEmail(),
-        user.getPassword(), 
+        user.getNom_prenom(),
+        user.getNumero(),
+        user.getPassword(),
         authorities);
   }
 
@@ -57,8 +60,8 @@ public class UserDetailsImpl implements UserDetails {
     return id;
   }
 
-  public String getEmail() {
-    return email;
+  public String getNumero() {
+    return numero;
   }
 
   @Override
@@ -68,8 +71,13 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public String getUsername() {
-    return username;
+    return nom_prenom;
   }
+
+//  @Override
+//  public String getNom_prenom() {
+//    return nom_prenom;
+//  }
 
   @Override
   public boolean isAccountNonExpired() {

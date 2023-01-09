@@ -1,10 +1,13 @@
 package com.aoua.medoc.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,6 +17,8 @@ import javax.validation.constraints.Size;
       @UniqueConstraint(columnNames = "username"),
       @UniqueConstraint(columnNames = "email") 
     })
+@Getter
+@AllArgsConstructor
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +26,19 @@ public class User {
 
   @NotBlank
   @Size(max = 20)
+  private String nom_prenom;
+
+  @NotBlank
+  @Size(max = 20)
   private String username;
 
   @NotBlank
-  @Size(max = 50)
-  @Email
+  @Size(max = 20)
   private String email;
+
+  @NotBlank
+  @Size(max = 50)
+  private String numero;
 
   @NotBlank
   @Size(max = 120)
@@ -41,9 +53,9 @@ public class User {
   public User() {
   }
 
-  public User(String username, String email, String password) {
-    this.username = username;
-    this.email = email;
+  public User(String nom_prenom, String numero, String password) {
+    this.nom_prenom = nom_prenom;
+    this.numero = numero;
     this.password = password;
   }
 
@@ -55,20 +67,20 @@ public class User {
     this.id = id;
   }
 
-  public String getUsername() {
-    return username;
+  public String getNom_prenom() {
+    return nom_prenom;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setNom_prenom(String username) {
+    this.nom_prenom = nom_prenom;
   }
 
-  public String getEmail() {
-    return email;
+  public String getNumero() {
+    return numero;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setNumero(String email) {
+    this.numero = numero;
   }
 
   public String getPassword() {
