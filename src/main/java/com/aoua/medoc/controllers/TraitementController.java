@@ -3,11 +3,13 @@ package com.aoua.medoc.controllers;
 import com.aoua.medoc.Service.TraitementService;
 import com.aoua.medoc.models.Traitement;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/traitement")
 public class TraitementController {
     public final TraitementService traitementService;
 
@@ -17,14 +19,14 @@ public class TraitementController {
     }
 
     //Afficher liste des traitements
-    @GetMapping(value = "/liste_traitement")
+    @GetMapping(value = "/liste")
 
     public List<Traitement> afficher() {
         return traitementService.afficher();
     }
-
-    @PostMapping(value = "/traitement")
-    @PostAuthorize("hasAuthority(USER)")
+//Ajouter traitement
+    @PostMapping(value = "/ajouter")
+    @PreAuthorize("hasAuthority(USER)")
 
     public Object ajouter(Traitement traitement) {
         try {
@@ -38,8 +40,8 @@ public class TraitementController {
     }
 
     // Modification d'un traitement
-    @PutMapping(value = "/modifier-traitement/{nom_medoc}")
-    @PostAuthorize("hasAuthority('USER')")
+    @PutMapping(value = "/modifier/{nom_medoc}")
+    @PreAuthorize("hasAuthority('USER')")
 
     public String modifier(@PathVariable Long id , Traitement traitement) {
           traitementService.modifier(id, traitement);
@@ -49,8 +51,8 @@ public class TraitementController {
 
 
     //suppression d'un traitement
-    @DeleteMapping(value = "/supprimer_traitement/{id}")
-    @PostAuthorize("hasAuthority('USER')")
+    @DeleteMapping(value = "/supprimer/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public String supprimer(@PathVariable long id){
         return traitementService.suupprimer(id);
     }
