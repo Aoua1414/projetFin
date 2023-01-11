@@ -2,6 +2,8 @@ package com.aoua.medoc.Service;
 
 import com.aoua.medoc.models.Historique;
 import com.aoua.medoc.models.Pharmacien;
+import com.aoua.medoc.models.Rdv;
+import com.aoua.medoc.models.Traitement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,5 +14,7 @@ public interface HistoriqueService {
 
     Historique ajouter(Historique historique);
 
-   List<Pharmacien> afficher();
+   List<Traitement> listerTraitement();
+
+   List<Rdv>listerRdv();
 }
