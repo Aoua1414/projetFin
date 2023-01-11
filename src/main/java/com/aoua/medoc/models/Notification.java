@@ -1,9 +1,6 @@
 package com.aoua.medoc.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -13,5 +10,10 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String type_notif;
+    private String message;
+
+    @ManyToOne
+    private User user;
+
+
 }

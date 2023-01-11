@@ -32,5 +32,8 @@ public class Traitement {
     @ManyToOne
    private Historique historique;
 
+    @ManyToOne
+    private User user;
+
 
 }

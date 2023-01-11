@@ -27,4 +27,8 @@ public class Rdv {
     @ManyToOne
    public Historique historique;
 
+    @ManyToOne
+    public User user;
+
+
 }
