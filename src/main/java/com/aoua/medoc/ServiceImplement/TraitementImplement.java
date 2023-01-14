@@ -2,11 +2,17 @@ package com.aoua.medoc.ServiceImplement;
 
 
 import com.aoua.medoc.Service.TraitementService;
+import com.aoua.medoc.models.Notification;
 import com.aoua.medoc.models.Traitement;
+import com.aoua.medoc.repository.NotificationRepository;
 import com.aoua.medoc.repository.TraitementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -15,10 +21,41 @@ import java.util.List;
 public class TraitementImplement  implements TraitementService {
 
     private final TraitementRepository traitementRepository;
+    private final NotificationRepository notificationRepository;
 
     @Override
-    public Traitement ajouter(Traitement traitement) {
-        return traitementRepository.save(traitement);
+    public String ajouter(Traitement traitement) {
+        //Recuperation de date debut et fin de traitement
+
+        LocalDate debut=traitement.getDate_debut();
+        LocalDate fin = traitement.getDate_fin();
+        long duree_traitement = traitement.getDuree_traitement();
+        long entre = ChronoUnit.DAYS.between(debut,fin);
+
+        System.out.println("=============== intervalle== "+entre);
+        System.out.println("=============== duree_traitement== "+duree_traitement);
+
+        if( entre == duree_traitement){
+            traitementRepository.save(traitement);
+
+            //pour envoyer notif
+
+            Notification no = new Notification();
+
+            no.setUser(traitement.getUser());
+            no.setDuree_traitement(traitement.getDuree_traitement());
+            no.setDate_debut(traitement.getDate_debut());
+            no.setDate_fin(traitement.getDate_fin());
+            no.setIntervalle(traitement.getIntervalle());
+            no.setPremiere_prise(traitement.getPremiere_prise());
+            no.setNbrePillule(traitement.getNbrePillule());
+
+            no.setMessage("prenez votre medicament");
+            notificationRepository.save(no);
+            return "Ajoute avec succes";
+        }else
+
+            return "Verifiez vos dates";
             }
 
     @Override

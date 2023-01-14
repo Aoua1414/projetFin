@@ -27,8 +27,7 @@ public class RdvController {
     //Ajouter rdv
 
     @PostMapping(value = "/ajouter")
-    @PreAuthorize("hasAuthority(USER)")
-     public Object ajouter(Rdv rdv){
+     public String ajouter(@RequestBody Rdv rdv){
         try {
             rdvService.ajouter(rdv);
             return "Ajouté avec succès";

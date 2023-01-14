@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TraitementService{
 
-    Traitement ajouter(Traitement traitement);
+    String ajouter(Traitement traitement);
 
     Traitement modifier(Long id, Traitement traitement);
 

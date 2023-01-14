@@ -5,16 +5,17 @@ import com.aoua.medoc.Service.UserService;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-
 public class UserImplement implements UserService {
 
-    private final UserRepository userRepository;
+    public User malle;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public User ajouter(User user) {
@@ -43,6 +44,16 @@ public class UserImplement implements UserService {
     @Override
     public List<User> afficher() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void aouamethode(Long iduser) {
+        malle = userRepository.getReferenceById(iduser);
+    }
+
+    @Override
+    public User aoua() {
+        return malle;
     }
 
 

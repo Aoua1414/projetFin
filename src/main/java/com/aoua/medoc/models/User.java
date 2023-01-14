@@ -2,6 +2,7 @@ package com.aoua.medoc.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -30,19 +31,19 @@ public class User {
   @Size(max = 20)
   private String nom_prenom;*/
 
-  @NotBlank
+
   @Size(max = 20)
   private String username;
 
-  @NotBlank
+
   @Size(max = 20)
   private String email;
 
-  @NotBlank
+
   @Size(max = 50)
   private String numero;
 
-  @NotBlank
+
   @Size(max = 120)
   private String password;
 
@@ -55,9 +56,10 @@ public class User {
   public User() {
   }
 
-  public User( String username, String password) {
+  public User( String username, String numero ,String password) {
     //this.nom_prenom = nom_prenom;
     this.username = username;
+    this.numero=numero;
     this.password = password;
   }
 

@@ -1,9 +1,11 @@
 package com.aoua.medoc.Service;
 
 import com.aoua.medoc.models.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
 
     //Methode pour creer user
@@ -15,4 +17,8 @@ public interface UserService {
     String supprimer(Long id);
 
     List<User> afficher();
+
+    void aouamethode(Long iduser);
+
+    User aoua();
 }

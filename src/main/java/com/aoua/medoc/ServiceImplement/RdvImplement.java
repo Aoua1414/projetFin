@@ -15,9 +15,10 @@ public class RdvImplement implements RdvService {
     private final RdvRepository rdvRepository;
 
     @Override
-    public Rdv ajouter(Rdv rdv) {
+    public String ajouter(Rdv rdv) {
 
-        return rdvRepository.save(rdv);
+        rdvRepository.save(rdv);
+        return "ENREGISTRE AVEC SUCCES";
 
     }
 

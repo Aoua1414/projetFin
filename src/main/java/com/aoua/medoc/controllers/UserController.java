@@ -38,7 +38,7 @@ public class UserController {
     }
 // Afficher la liste des users
     @GetMapping(value = "/liste")
-    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     public List<User> afficher(){
         return userService.afficher();
     }

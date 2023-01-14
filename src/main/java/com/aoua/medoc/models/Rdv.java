@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -21,11 +23,9 @@ public class Rdv {
     private Long id_rdv;
     private String service_medical;
     private String motif;
-    private Date date_rdv;
-    private Time heure_rdv;
+    private LocalDate date_rdv;
+    private LocalTime heure_rdv;
 
-    @ManyToOne
-   public Historique historique;
 
     @ManyToOne
     public User user;

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.aoua.medoc.Service.UserService;
 import com.aoua.medoc.payload.request.LoginRequest;
 import com.aoua.medoc.payload.request.SignupRequest;
 import com.aoua.medoc.payload.response.JwtResponse;
@@ -42,7 +43,8 @@ public class AuthController {
 
   @Autowired
   UserRepository userRepository;
-
+  @Autowired
+  UserService userService;
   @Autowired
   RoleRepository roleRepository;
 
@@ -61,16 +63,16 @@ public class AuthController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
     
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
-
+    userService.aouamethode(userDetails.getId());
     return ResponseEntity.ok(new JwtResponse(jwt,
                          userDetails.getId(), 
                          userDetails.getUsername(),
-                        userDetails.getNumero(),
-//                         userDetails.getEmail(),
+                       // userDetails.getNumero(),
+                         userDetails.getEmail(),
                          roles));
   }
 
@@ -89,7 +91,8 @@ public class AuthController {
     }
 */
     // Create new user's account
-    User user = new User(signUpRequest.getUsername(), 
+    User user = new User(signUpRequest.getUsername(),
+            signUpRequest.getNumero(),
 
                encoder.encode(signUpRequest.getPassword()));
 
@@ -98,8 +101,13 @@ public class AuthController {
 
     if (strRoles == null) {
       Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+      if (userRole==null){
+        return ResponseEntity.badRequest().body(new MessageResponse("dfghj"));
+      }else {
+        roles.add(userRole);
+      }
 
-      roles.add(userRole);
+
     } else {
       strRoles.forEach(role -> {
         switch (role) {

@@ -26,17 +26,15 @@ public class TraitementController {
     }
 //Ajouter traitement
     @PostMapping(value = "/ajouter")
-    @PreAuthorize("hasAuthority(USER)")
+    public Object ajouter(@RequestBody Traitement traitement) {
+//        try {
 
-    public Object ajouter(Traitement traitement) {
-        try {
-            traitementService.ajouter(traitement);
-            return "Ajouté avec succès";
+            return  traitementService.ajouter(traitement);
 
-        } catch (Exception e) {
-
-            return "existe deja";
-        }
+//        } catch (Exception e) {
+//
+//            return e.getMessage();
+//        }
     }
 
     // Modification d'un traitement

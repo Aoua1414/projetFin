@@ -9,6 +9,9 @@ public class SignupRequest {
   @Size(min = 3, max = 20)
   private String username;
 
+  @NotBlank
+  @Size(max = 50)
+  private String numero;
   /*
   @NotBlank
   @Size(max = 50)
@@ -16,6 +19,14 @@ public class SignupRequest {
   private String email;*/
 
   private Set<String> role;
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
 
   @NotBlank
   @Size(min = 6, max = 40)

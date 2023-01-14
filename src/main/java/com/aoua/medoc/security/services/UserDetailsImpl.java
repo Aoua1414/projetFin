@@ -19,9 +19,9 @@ public class UserDetailsImpl implements UserDetails {
   private Long id;
   private String email;
   private String username;
-
-  private String nom_prenom;
-
+//
+//  private String nom_prenom;
+//
   private String numero;
 
   @JsonIgnore
@@ -29,13 +29,14 @@ public class UserDetailsImpl implements UserDetails {
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserDetailsImpl(Long id, String username, String email, String password,
+  public UserDetailsImpl(Long id, String numero,  String username, String email, String password,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
-    this.nom_prenom = nom_prenom;
-    this.numero = numero;
+    this.username = username;
+    this.email = email;
     this.password = password;
     this.authorities = authorities;
+    this.numero=numero;
   }
 
   public static UserDetailsImpl build(User user) {
@@ -44,7 +45,8 @@ public class UserDetailsImpl implements UserDetails {
         .collect(Collectors.toList());
 
     return new UserDetailsImpl(
-        user.getId(), 
+        user.getId(),
+            user.getEmail(),
         user.getUsername(),
         user.getNumero(),
         user.getPassword(),
@@ -60,8 +62,16 @@ public class UserDetailsImpl implements UserDetails {
     return id;
   }
 
-  public String getNumero() {
-    return numero;
+//  public String getNumero() {
+//    return numero;
+//  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   @Override
@@ -71,13 +81,21 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public String getUsername() {
-    return nom_prenom;
+    return username;
   }
 
 //  @Override
 //  public String getNom_prenom() {
 //    return nom_prenom;
 //  }
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
 
   @Override
   public boolean isAccountNonExpired() {

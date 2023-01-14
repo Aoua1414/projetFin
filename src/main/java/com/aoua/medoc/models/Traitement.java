@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Getter
@@ -21,19 +23,14 @@ public class Traitement {
 
     private Long id_traitement;
     private String nom_medoc;
-    private String duree_traitement;
+    private Long duree_traitement;
     private String nbrePillule;
     private String fois_parjour;
-    private Date date_debut;
-    private Date date_fin;
-    private Time premiere_prise;
-    private int intervalle;
-
-    @ManyToOne
-   private Historique historique;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
+    private LocalTime premiere_prise;
+    private LocalTime intervalle;
 
     @ManyToOne
     private User user;
-
-
 }

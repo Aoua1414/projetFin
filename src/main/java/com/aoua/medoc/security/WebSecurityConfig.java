@@ -1,5 +1,6 @@
 package com.aoua.medoc.security;
 
+import com.aoua.medoc.models.CustomAccessDeniedHandler;
 import com.aoua.medoc.security.jwt.AuthEntryPointJwt;
 import com.aoua.medoc.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,12 +85,12 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-        .antMatchers("/api/test/**").permitAll()
-            .antMatchers("/api/**").permitAll()
+        //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .authorizeRequests().antMatchers("/api/**").permitAll()
+
         .anyRequest().authenticated();
+    http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());
     
     http.authenticationProvider(authenticationProvider());
 
