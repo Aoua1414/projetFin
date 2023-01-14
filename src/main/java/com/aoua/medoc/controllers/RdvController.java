@@ -37,8 +37,8 @@ public class RdvController {
     }
 
     //Modification rdv
-    @PutMapping(value = "/modifier/{motif}")
-    @PreAuthorize("hasAuthority(USER)")
+    @PutMapping(value = "/modifier/{id}")
+//    @PreAuthorize("hasAuthority(USER)")
     public String modifier(@PathVariable Long id, Rdv rdv){
         rdvService.modifier(id, rdv);
         return "modifié avec succès ";
@@ -46,7 +46,7 @@ public class RdvController {
 
     //Suppression RDV
     @DeleteMapping(value = "/suprimer/{id}")
-    @PreAuthorize("hasAuthority(USER)")
+//    @PreAuthorize("hasAuthority(USER)")
     public String supprimer(@PathVariable long id){
         return rdvService.supprimer(id);
     }

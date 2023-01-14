@@ -89,14 +89,14 @@ public class PharmacienController {
     }
     // Modifier pharmacien
     @PutMapping(value = "/modifier/{id}")
-    @PreAuthorize("hasAutority(ADMIN)")
+//    @PreAuthorize("hasAutority(ADMIN)")
     public String modifier(@PathVariable Long id, Pharmacien pharmacien){
         pharmacienService.modifier(id, pharmacien);
         return "modifié avec succès";
     }
     //supprimer pharmacien
     @DeleteMapping(value = "/supprimer/{id}")
-    @PreAuthorize("hasAuthority(ADMIN)")
+//    @PreAuthorize("hasAuthority(ADMIN)")
     public String supprimer(@PathVariable long id){
         return pharmacienService.supprimer(id);
     }
