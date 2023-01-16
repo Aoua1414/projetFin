@@ -5,6 +5,7 @@ import com.aoua.medoc.models.Pharmacien;
 import com.aoua.medoc.repository.PharmacienRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class PharmacienImplement implements PharmacienService {
     }
 
     @Override
-    public Pharmacien modifier(Long id, Pharmacien pharmacien) {
+    public Pharmacien modifier(Long id,  Pharmacien pharmacien) {
         return pharmacienRepository.findById(id)
                 .map(pharmacien1 ->{
                     pharmacien1.setNom_prenom(pharmacien.getNom_prenom());

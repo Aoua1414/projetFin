@@ -50,9 +50,9 @@ public class PharmacienController {
             pharmacien.setNom_prenom(nom_prenom);
             pharmacien.setNumero(numero);
             pharmacien.setAdresse(adresse);
-            User user = userService.aoua();
+//            User user = userService.aoua();
 
-            pharmacien.setUser(user);
+//            pharmacien.setUser(user);
             pharmacienService.ajouter(pharmacien);
             return "Ajouté avec succès";
         } catch (HttpStatusCodeException httpStatusCodeException) {
@@ -90,7 +90,7 @@ public class PharmacienController {
     // Modifier pharmacien
     @PutMapping(value = "/modifier/{id}")
 //    @PreAuthorize("hasAutority(ADMIN)")
-    public String modifier(@PathVariable Long id, Pharmacien pharmacien){
+    public String modifier(@PathVariable Long id, @RequestBody Pharmacien pharmacien){
         pharmacienService.modifier(id, pharmacien);
         return "modifié avec succès";
     }

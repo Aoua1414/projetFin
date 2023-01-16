@@ -18,7 +18,7 @@ public interface UserService {
 
     List<User> afficher();
 
-    void aouamethode(Long iduser);
+//    void aouamethode(Long iduser);
 
-    User aoua();
+//    User aoua();
 }

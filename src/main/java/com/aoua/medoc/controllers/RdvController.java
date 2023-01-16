@@ -39,9 +39,9 @@ public class RdvController {
     //Modification rdv
     @PutMapping(value = "/modifier/{id}")
 //    @PreAuthorize("hasAuthority(USER)")
-    public String modifier(@PathVariable Long id, Rdv rdv){
-        rdvService.modifier(id, rdv);
-        return "modifié avec succès ";
+    public Rdv modifier(@PathVariable Long id, @RequestBody Rdv rdv){
+//        rdvService.modifier(id, rdv);
+        return rdvService.modifier(id, rdv );
     }
 
     //Suppression RDV

@@ -30,5 +30,11 @@ public class Rdv {
     @ManyToOne
     public User user;
 
+    public void modifier(String service_medical, String motif, LocalDate date_rdv, LocalTime heure_rdv){
+        this.service_medical=service_medical;
+        this.motif=motif;
+        this.date_rdv=date_rdv;
+        this.heure_rdv=heure_rdv;
+    }
 
 }

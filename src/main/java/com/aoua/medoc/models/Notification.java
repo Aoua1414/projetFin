@@ -16,7 +16,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String message;
-
+    private String nom_medoc;
     private LocalDate date_debut;
     private LocalDate date_fin;
     private LocalTime premiere_prise;

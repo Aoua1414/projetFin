@@ -30,6 +30,7 @@ public class UserImplement implements UserService {
                 .map(user1 -> {
                     user1.setNumero(user.getNumero());
                     user1.setPassword(user.getPassword());
+
                     return userRepository.save(user1);
                 }).orElseThrow(()->new RuntimeException("User introuvable") );
     }
@@ -45,16 +46,16 @@ public class UserImplement implements UserService {
     public List<User> afficher() {
         return userRepository.findAll();
     }
-
-    @Override
-    public void aouamethode(Long iduser) {
-        malle = userRepository.getReferenceById(iduser);
-    }
-
-    @Override
-    public User aoua() {
-        return malle;
-    }
+//
+//    @Override
+//    public void aouamethode(Long iduser) {
+//        malle = userRepository.getReferenceById(iduser);
+//    }
+//
+//    @Override
+//    public User aoua() {
+//        return malle;
+//    }
 
 
 }

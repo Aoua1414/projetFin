@@ -41,7 +41,7 @@ public class TraitementImplement  implements TraitementService {
             //pour envoyer notif
 
             Notification no = new Notification();
-
+            no.setNom_medoc("Dessdrdrtrt");
             no.setUser(traitement.getUser());
             no.setDuree_traitement(traitement.getDuree_traitement());
             no.setDate_debut(traitement.getDate_debut());
@@ -49,6 +49,8 @@ public class TraitementImplement  implements TraitementService {
             no.setIntervalle(traitement.getIntervalle());
             no.setPremiere_prise(traitement.getPremiere_prise());
             no.setNbrePillule(traitement.getNbrePillule());
+            no.setNom_medoc(traitement.getNom_medoc());
+
 
             no.setMessage("prenez votre medicament");
             notificationRepository.save(no);
