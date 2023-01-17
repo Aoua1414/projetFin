@@ -2,15 +2,13 @@ package com.aoua.medoc.Service;
 
 
 import com.aoua.medoc.models.Traitement;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 public interface TraitementService{
 
-    String ajouter(Traitement traitement);
+    String ajouter(Traitement traitement, long id);
 
     Traitement modifier(Long id, Traitement traitement);
 

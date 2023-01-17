@@ -15,14 +15,9 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String titre;
     private String message;
-    private String nom_medoc;
-    private LocalDate date_debut;
-    private LocalDate date_fin;
-    private LocalTime premiere_prise;
-    private LocalTime intervalle;
-    private Long duree_traitement;
-    private String nbrePillule;
+
 
     @ManyToOne
     private User user;

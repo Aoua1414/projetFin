@@ -25,7 +25,7 @@ public class Traitement {
     private String nom_medoc;
     private Long duree_traitement;
     private String nbrePillule;
-    private String fois_parjour;
+    private Long fois_parjour;
     private LocalDate date_debut;
     private LocalDate date_fin;
     private LocalTime premiere_prise;

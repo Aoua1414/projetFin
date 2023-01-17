@@ -30,12 +30,12 @@ public class TraitementController {
     public List<Traitement> afficher() {
         return traitementService.afficher();
     }
-//Ajouter traitement
+     //Ajouter traitement
     @PostMapping(value = "/ajouter")
     public Object ajouter(@RequestBody Traitement traitement) {
 //        try {
 
-            return  traitementService.ajouter(traitement);
+            return  traitementService.ajouter(traitement,traitement.getUser().getId());
 
 //        } catch (Exception e) {
 //
@@ -53,13 +53,13 @@ public class TraitementController {
     }
 
     @GetMapping(value = "/filtrertraitementParDate")
-
-
-    public String filtrerParDate(@RequestParam (value = "date1") LocalDate date1, @RequestParam(value = "date2") LocalDate date2) {
+    public String filtrerParDate(@RequestBody  LocalDate date1) {
 
         Date today = new Date();
+
+        System.out.println("TYUI"+date1);
        Traitement trrt = (Traitement) traitementService.afficher();
-       if(trrt.getDate_debut().isBefore(date1) && trrt.getDate_fin().isAfter(date2)){
+       if(trrt.getDate_debut().isBefore(date1) ){
            return trrt.getNom_medoc();
        }
        else{
@@ -69,7 +69,7 @@ public class TraitementController {
 
     //suppression d'un traitement
     @DeleteMapping(value = "/supprimer/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+//    @PreAuthorize("hasAuthority('USER')")
     public String supprimer(@PathVariable long id){
         return traitementService.suupprimer(id);
     }

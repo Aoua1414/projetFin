@@ -29,10 +29,10 @@ public class RdvController {
     @PostMapping(value = "/ajouter")
      public String ajouter(@RequestBody Rdv rdv){
         try {
-            rdvService.ajouter(rdv);
+            rdvService.ajouter(rdv,rdv.getUser().getId());
             return "Ajouté avec succès";
         }catch (Exception e){
-            return "Existe deja";
+            return e.getMessage();
         }
     }
 

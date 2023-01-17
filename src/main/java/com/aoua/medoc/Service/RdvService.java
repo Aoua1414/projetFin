@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RdvService {
 
-    String ajouter (Rdv rdv);
+    String ajouter (Rdv rdv, Long iduser);
     Rdv modifier (Long id, Rdv rdv);
 
     String supprimer (Long id);

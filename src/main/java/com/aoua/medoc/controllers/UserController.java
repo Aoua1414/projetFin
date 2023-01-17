@@ -25,7 +25,7 @@ public class UserController {
 
     //Ajout d'un user
    @PostMapping(value = "/ajouter")
-   @PreAuthorize("hasAuthority('USER')")
+//   @PreAuthorize("hasAuthority('USER')")
     public Object ajouter(User user){
         try{
             userService.ajouter(user);

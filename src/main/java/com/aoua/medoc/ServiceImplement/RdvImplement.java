@@ -1,9 +1,13 @@
 package com.aoua.medoc.ServiceImplement;
 
 import com.aoua.medoc.Service.RdvService;
+import com.aoua.medoc.controllers.NotificationController;
 import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Rdv;
+import com.aoua.medoc.repository.NotificationRepository;
 import com.aoua.medoc.repository.RdvRepository;
+import com.aoua.medoc.repository.TraitementRepository;
+import com.aoua.medoc.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +17,21 @@ import java.util.List;
 @AllArgsConstructor
 
 public class RdvImplement implements RdvService {
+
+    private UserRepository userRepository;
+    private TraitementRepository traitementRepository;
+    private NotificationRepository notificationRepository;
     private final RdvRepository rdvRepository;
 
     @Override
-    public String ajouter(Rdv rdv) {
+    public String ajouter(Rdv rdv, Long iduser) {
 
         rdvRepository.save(rdv);
-        return "ENREGISTRE AVEC SUCCES";
+
+        NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);
+        notificationController.envoyermessage(iduser, rdv.getId_rdv(), true);
+
+        return "Rendez-vous enregistré avec succès.";
 
     }
 
