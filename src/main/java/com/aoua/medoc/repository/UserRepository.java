@@ -1,5 +1,6 @@
 package com.aoua.medoc.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 //  Role RecupererRoleUser(User user);
+
+  //List<User> findByRole(Role role);
 }

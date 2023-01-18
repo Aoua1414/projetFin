@@ -23,8 +23,8 @@ public class Rdv {
     private Long id_rdv;
     private String service_medical;
     private String motif;
-    private LocalDate date_rdv;
-    private LocalTime heure_rdv;
+    private LocalDate date;
+    private LocalTime heure;
 
 
     @ManyToOne
@@ -33,8 +33,8 @@ public class Rdv {
     public void modifier(String service_medical, String motif, LocalDate date_rdv, LocalTime heure_rdv){
         this.service_medical=service_medical;
         this.motif=motif;
-        this.date_rdv=date_rdv;
-        this.heure_rdv=heure_rdv;
+        this.date=date_rdv;
+        this.heure=heure_rdv;
     }
 
 }

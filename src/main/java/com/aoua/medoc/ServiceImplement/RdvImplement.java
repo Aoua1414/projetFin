@@ -28,8 +28,8 @@ public class RdvImplement implements RdvService {
 
         rdvRepository.save(rdv);
 
-        NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);
-        notificationController.envoyermessage(iduser, rdv.getId_rdv(), true);
+//        NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);
+//        notificationController.envoyermessage(iduser, rdv.getId_rdv(), true);
 
         return "Rendez-vous enregistré avec succès.";
 
@@ -40,16 +40,14 @@ public class RdvImplement implements RdvService {
         return rdvRepository.findById(id)
                 .map(rdv1 -> {
 //                    rdv1.setHeure_rdv(rdv.getHeure_rdv());
-                    rdv1.setHeure_rdv(rdv.getHeure_rdv());
-                    rdv1.setDate_rdv(rdv.getDate_rdv());
+                    rdv1.setHeure(rdv.getHeure());
+                    rdv1.setDate(rdv.getDate());
                     rdv1.setMotif(rdv.getMotif());
                     rdv1.setService_medical(rdv.getService_medical());
                     System.out.println(rdv1);
                     return rdvRepository.save(rdv1);
                 }).orElseThrow(() -> new RuntimeException(String.valueOf(Messages.set("Rendez-vous introuvable",true))));
     }
-
-
 
     @Override
     public String supprimer(Long id) {

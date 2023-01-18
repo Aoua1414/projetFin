@@ -1,6 +1,7 @@
 package com.aoua.medoc.controllers;
 
 import com.aoua.medoc.Service.TraitementService;
+import com.aoua.medoc.ServiceImplement.NotificationImplement;
 import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.repository.TraitementRepository;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -34,7 +35,7 @@ public class TraitementController {
     @PostMapping(value = "/ajouter")
     public Object ajouter(@RequestBody Traitement traitement) {
 //        try {
-
+        NotificationImplement.sendNotification();
             return  traitementService.ajouter(traitement,traitement.getUser().getId());
 
 //        } catch (Exception e) {

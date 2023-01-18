@@ -57,8 +57,10 @@ public class TraitementImplement  implements TraitementService {
 //            no.setNbrePillule(traitement.getNbrePillule());
 //            no.setNom_medoc(traitement.getNom_medoc());
 
-            NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);
-            notificationController.envoyermessage(iduser, traitement1.getId_traitement(),true);
+//            NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);
+//            notificationController.envoyermessage(iduser, traitement1.getId_traitement(),true);
+
+
 //            no.setMessage("prenez votre medicament");
 //            notificationRepository.save(no);
             return "Traitement enregistré avec succès.";

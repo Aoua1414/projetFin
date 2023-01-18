@@ -17,10 +17,16 @@ public class Notification {
     private Long id;
     private String titre;
     private String message;
+    private LocalDate date;
+    private LocalTime heure;
 
 
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Traitement traitement;
+    @ManyToOne
+    private Rdv rdv;
 
 
 }

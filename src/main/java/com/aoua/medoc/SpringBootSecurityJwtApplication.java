@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor
-@SpringBootApplication
+@SpringBootApplication @EnableScheduling
 public class SpringBootSecurityJwtApplication {
 
 
