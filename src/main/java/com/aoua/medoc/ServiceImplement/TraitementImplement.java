@@ -10,23 +10,27 @@ import com.aoua.medoc.repository.RdvRepository;
 import com.aoua.medoc.repository.TraitementRepository;
 import com.aoua.medoc.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 
 public class TraitementImplement  implements TraitementService {
-
+@Autowired
     private final TraitementRepository traitementRepository;
+@Autowired
     private final NotificationRepository notificationRepository;
-
+@Autowired
     private UserRepository userRepository;
+    @Autowired
     private RdvRepository rdvRepository;
 
     @Override
@@ -103,6 +107,13 @@ public class TraitementImplement  implements TraitementService {
     public List<Traitement> afficher() {
         return traitementRepository.findAll();
     }
+
+
+
+   /* @Override
+    public List<Traitement> flitreDate(LocalDate datedebut) {
+        return traitementRepository.findByDatedebut(datedebut);
+    }*/
 }
 
 

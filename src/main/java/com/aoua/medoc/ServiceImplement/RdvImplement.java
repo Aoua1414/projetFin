@@ -9,6 +9,7 @@ import com.aoua.medoc.repository.RdvRepository;
 import com.aoua.medoc.repository.TraitementRepository;
 import com.aoua.medoc.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +20,10 @@ import java.util.List;
 public class RdvImplement implements RdvService {
 
     private UserRepository userRepository;
+    @Autowired
     private TraitementRepository traitementRepository;
     private NotificationRepository notificationRepository;
+    @Autowired
     private final RdvRepository rdvRepository;
 
     @Override

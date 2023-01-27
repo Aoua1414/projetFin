@@ -36,7 +36,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     body.put("message", authException.getMessage());
     body.put("path", request.getServletPath());
 
-    final String nonauthorise = "Vous n'etes pas authorise a faire cet action !";
+    final String nonauthorise = "Vous n'etes pas authorise a faire cette action !";
 
     response.setContentType(nonauthorise);
 

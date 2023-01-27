@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "users", 
     uniqueConstraints = { 
@@ -25,25 +24,12 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  /*
-  @NotBlank
-  @Size(max = 20)
-  private String nom_prenom;*/
-
-
   @Size(max = 20)
   private String username;
-
-
   @Size(max = 20)
   private String email;
-
-
   @Size(max = 50)
   private String numero;
-
-
   @Size(max = 120)
   private String password;
 

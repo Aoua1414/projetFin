@@ -3,19 +3,28 @@ package com.aoua.medoc.controllers;
 import com.aoua.medoc.Service.TraitementService;
 import com.aoua.medoc.ServiceImplement.NotificationImplement;
 import com.aoua.medoc.models.Traitement;
+import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.TraitementRepository;
+import org.hibernate.type.LocalDateType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/traitement")
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api/traitement")
 public class TraitementController {
+    @Autowired
     public final TraitementService traitementService;
+
+    @Autowired
     private final TraitementRepository traitementRepository;
 
 
@@ -26,17 +35,35 @@ public class TraitementController {
     }
 
     //Afficher liste des traitements
+    @GetMapping(value = "/jour/{id}")
+
+    public List<Traitement> afficher(@PathVariable Long id) {
+
+
+        Traitement traitementList =  traitementRepository.findById(id).get();
+        LocalDate lt
+                = LocalDate.now();
+        List<Traitement> traitedujour = new ArrayList<>();
+       if(traitementList.getDate_debut().equals(lt) || traitementList.getDate_debut().isBefore(lt) && traitementList.getDate_fin().isAfter(lt)){
+           traitedujour.add(traitementList);
+       }
+        return traitedujour;
+    }
+
+
     @GetMapping(value = "/liste")
 
-    public List<Traitement> afficher() {
+    public List<Traitement> afficherTraitementJour() {
         return traitementService.afficher();
     }
+
+
      //Ajouter traitement
-    @PostMapping(value = "/ajouter")
-    public Object ajouter(@RequestBody Traitement traitement) {
+    @PostMapping(value = "/ajouter/{id}")
+    public Object ajouter(@RequestBody Traitement traitement, @PathVariable("id")User user) {
 //        try {
         NotificationImplement.sendNotification();
-            return  traitementService.ajouter(traitement,traitement.getUser().getId());
+            return  traitementService.ajouter(traitement,user.getId());
 
 //        } catch (Exception e) {
 //
@@ -53,10 +80,13 @@ public class TraitementController {
           return "modifié avec succès ";
     }
 
+    /*
     @GetMapping(value = "/filtrertraitementParDate")
-    public String filtrerParDate(@RequestBody  LocalDate date1) {
+    public List<Traitement> filtrerParDate(@RequestParam  LocalDate date1) {
 
-        Date today = new Date();
+
+        return traitementService(date1);*/
+       /* Date today = new Date();
 
         System.out.println("TYUI"+date1);
        Traitement trrt = (Traitement) traitementService.afficher();
@@ -64,9 +94,9 @@ public class TraitementController {
            return trrt.getNom_medoc();
        }
        else{
-       }
-        return "modifié avec succès ";
-    }
+       }*/
+
+   // }
 
     //suppression d'un traitement
     @DeleteMapping(value = "/supprimer/{id}")

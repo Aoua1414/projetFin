@@ -88,6 +88,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeRequests().antMatchers("/api/**").permitAll()
+            .antMatchers("/rdv/**").permitAll()
+
 
         .anyRequest().authenticated();
     http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());

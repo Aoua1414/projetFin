@@ -20,7 +20,6 @@ public class Notification {
     private LocalDate date;
     private LocalTime heure;
 
-
     @ManyToOne
     private User user;
     @ManyToOne

@@ -137,6 +137,7 @@ public class NotificationController {
             for (Rdv rdv :rdvList) {
                 LocalTime nowTime=LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute());
 
+//    l'envoi des notif de  rdv
 
                 if (rdv.getHeure().equals(nowTime)){
                     Notification notification=new Notification();

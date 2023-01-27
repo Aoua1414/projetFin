@@ -10,7 +10,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
-
 @Entity
 @AllArgsConstructor
 @Getter
@@ -26,10 +25,8 @@ public class Rdv {
     private LocalDate date;
     private LocalTime heure;
 
-
     @ManyToOne
     public User user;
-
     public void modifier(String service_medical, String motif, LocalDate date_rdv, LocalTime heure_rdv){
         this.service_medical=service_medical;
         this.motif=motif;
