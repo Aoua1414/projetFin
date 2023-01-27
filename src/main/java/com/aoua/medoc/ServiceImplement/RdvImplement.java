@@ -4,6 +4,7 @@ import com.aoua.medoc.Service.RdvService;
 import com.aoua.medoc.controllers.NotificationController;
 import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Rdv;
+import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.NotificationRepository;
 import com.aoua.medoc.repository.RdvRepository;
 import com.aoua.medoc.repository.TraitementRepository;
@@ -27,8 +28,8 @@ public class RdvImplement implements RdvService {
     private final RdvRepository rdvRepository;
 
     @Override
-    public String ajouter(Rdv rdv, Long iduser) {
-
+    public String ajouter(Rdv rdv, User iduser) {
+     rdv.setUser(iduser);
         rdvRepository.save(rdv);
 
 //        NotificationController notificationController = new NotificationController(userRepository,traitementRepository, notificationRepository, rdvRepository);

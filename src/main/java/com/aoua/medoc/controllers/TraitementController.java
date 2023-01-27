@@ -60,7 +60,7 @@ public class TraitementController {
 
      //Ajouter traitement
     @PostMapping(value = "/ajouter/{id}")
-    public Object ajouter(@RequestBody Traitement traitement, @PathVariable("id")User user) {
+    public Object ajouter(@RequestBody Traitement traitement, @PathVariable("id") User user) {
 //        try {
         NotificationImplement.sendNotification();
             return  traitementService.ajouter(traitement,user.getId());
