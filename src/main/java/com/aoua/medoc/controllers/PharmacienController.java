@@ -17,6 +17,8 @@ import org.springframework.web.client.HttpStatusCodeException;
 import java.util.List;
 
 @RequestMapping("/pharmacien")
+
+@CrossOrigin(origins = {"http://localhost:4200/", "http://localhost:8100/"}, maxAge = 3600, allowCredentials="true")
 @RestController
 public class PharmacienController {
     @Autowired
@@ -42,18 +44,13 @@ public class PharmacienController {
     }
     //Ajouter pharmacien
     @PostMapping("/ajouter")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Object ajouter(@Param("nom_prenom") String nom_prenom, @Param("numero") Integer numero,@Param("adresse") String adresse ){
+   // @PreAuthorize("hasRole('ADMIN')")
+    public Object ajouter(@RequestBody Pharmacien pharmacien ){
 
         try {
-            Pharmacien pharmacien = new Pharmacien();
-            pharmacien.setNom_prenom(nom_prenom);
-            pharmacien.setNumero(numero);
-            pharmacien.setAdresse(adresse);
-//            User user = userService.aoua();
 
-//            pharmacien.setUser(user);
             pharmacienService.ajouter(pharmacien);
+            System.out.println("nom "+pharmacien.getNom_prenom());
             return "Ajouté avec succès";
         } catch (HttpStatusCodeException httpStatusCodeException) {
             return "Non authorise";

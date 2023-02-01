@@ -5,15 +5,14 @@ import com.aoua.medoc.models.User;
 import org.aspectj.bridge.Message;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200/", "http://localhost:8100/"}, maxAge = 3600, allowCredentials="true")
+//@CrossOrigin(value = "http://localhost:8100",maxAge = 3600,allowCredentials = "true")
 @RequestMapping("/user")
 public class UserController {
 

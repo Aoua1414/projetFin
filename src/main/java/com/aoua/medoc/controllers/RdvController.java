@@ -6,15 +6,14 @@ import com.aoua.medoc.models.Rdv;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.RdvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 //@CrossOrigin(origins = "*", maxAge = 3600)
-@CrossOrigin(value = "http://localhost:8100",maxAge = 3600,allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200/", "http://localhost:8100/"}, maxAge = 3600, allowCredentials="true")
 @RequestMapping("/rdv")
 public class RdvController {
     public final RdvService rdvService;
@@ -30,6 +29,13 @@ public class RdvController {
     public List<Rdv> afficher(){
         return rdvRepository.findAll();
     }
+
+    //afficher par id
+    @GetMapping("/parid/{id}")
+    public Optional<Rdv> afficherrdv(@PathVariable Long id){
+      return rdvRepository.findById(id);
+    }
+
     //Ajouter rdv
 
     @PostMapping(value = "/ajouter/{id}")
