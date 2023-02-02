@@ -5,17 +5,13 @@ import com.aoua.medoc.ServiceImplement.NotificationImplement;
 import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.TraitementRepository;
-import org.hibernate.type.LocalDateType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -106,4 +102,30 @@ public class TraitementController {
         return traitementService.suupprimer(id);
     }
 
+
+    @GetMapping(value = "/touttraitememt")
+    public List<List<Traitement>> toutdujour(){
+        List<Traitement> tr = traitementRepository.findAll();
+        System.out.println("tout trtm "+tr.size());
+        System.out.println("tout trtm "+tr);
+
+        LocalDate lt = LocalDate.now();
+
+        List<List<Traitement>> traitedujour = new ArrayList<>();
+   /*  if(tr.get(6).getDate_debut().equals(lt)){
+         System.out.println("tout dans condition ");
+     }
+     else {
+         System.out.println("hors ");
+     }*/
+        for(int i = 0; i<tr.size();i++){
+            System.out.println("debut"+tr.get(i).getDate_debut());
+            System.out.println("tout trtm "+tr);
+          if(tr.get(i).getDate_debut().isBefore(lt) && tr.get(i).getDate_fin().isAfter(lt) || tr.get(i).getDate_debut().equals(lt) && tr.get(i).getDate_fin().isAfter(lt)){
+              traitedujour.add(tr);
+          }
+        }
+
+        return traitedujour;
+    }
 }
