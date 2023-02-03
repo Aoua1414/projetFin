@@ -10,11 +10,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:8200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/api/traitement")
 public class TraitementController {
     @Autowired
@@ -111,17 +112,22 @@ public class TraitementController {
 
         LocalDate lt = LocalDate.now();
 
+
         List<List<Traitement>> traitedujour = new ArrayList<>();
    /*  if(tr.get(6).getDate_debut().equals(lt)){
          System.out.println("tout dans condition ");
-     }
+     } && tr.get(i).getDate_fin().isAfter(lt) || tr.get(i).getDate_debut().equals(lt) && tr.get(i).getDate_fin().isAfter(lt)
      else {
          System.out.println("hors ");
      }*/
+
+        //pour avoir les traitements du jour
+
         for(int i = 0; i<tr.size();i++){
+            Period intervalle = Period.between(tr.get(i).getDate_fin(),tr.get(i).getDate_debut());
             System.out.println("debut"+tr.get(i).getDate_debut());
             System.out.println("tout trtm "+tr);
-          if(tr.get(i).getDate_debut().isBefore(lt) && tr.get(i).getDate_fin().isAfter(lt) || tr.get(i).getDate_debut().equals(lt) && tr.get(i).getDate_fin().isAfter(lt)){
+          if(!intervalle.isNegative()){
               traitedujour.add(tr);
           }
         }
