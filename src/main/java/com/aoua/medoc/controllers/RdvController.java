@@ -3,11 +3,14 @@ package com.aoua.medoc.controllers;
 import com.aoua.medoc.Service.RdvService;
 import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Rdv;
+import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.RdvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,5 +71,18 @@ public class RdvController {
 //    @PreAuthorize("hasAuthority(USER)")
     public String supprimer(@PathVariable long id){
         return rdvService.supprimer(id);
+    }
+
+    //Afficher liste des rdv du jour
+    @GetMapping(value = "/jour/{id}")
+
+    public List<Rdv> afficher(@PathVariable("id") User user) {
+
+
+        LocalDate lt
+                = LocalDate.now();
+        List<Rdv> rdvList = rdvRepository.findByDateAndUser(lt,user);
+
+        return rdvList;
     }
 }

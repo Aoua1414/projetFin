@@ -34,17 +34,23 @@ public class TraitementController {
     //Afficher liste des traitements
     @GetMapping(value = "/jour/{id}")
 
-    public List<Traitement> afficher(@PathVariable Long id) {
+    public List<Traitement> afficher(@PathVariable("id") User user) {
 
 
-        Traitement traitementList =  traitementRepository.findById(id).get();
+        //Traitement traitementList =  traitementRepository.findById(id).get();
         LocalDate lt
                 = LocalDate.now();
-        List<Traitement> traitedujour = new ArrayList<>();
-       if(traitementList.getDate_debut().equals(lt) || traitementList.getDate_debut().isBefore(lt) && traitementList.getDate_fin().isAfter(lt)){
-           traitedujour.add(traitementList);
-       }
-        return traitedujour;
+        List<Traitement> traitementList = traitementRepository.findByUser(user);
+
+        List<Traitement> todayTraitement=new ArrayList<>();
+        for (Traitement traitement:traitementList
+             ) {
+            if(traitement.getDate_debut().equals(lt) || (traitement.getDate_debut().isBefore(lt) && traitement.getDate_fin().isAfter(lt)) || traitement.getDate_fin().equals(lt) ){
+                todayTraitement.add(traitement);
+            }
+        }
+
+        return todayTraitement;
     }
 
 
@@ -61,6 +67,7 @@ public class TraitementController {
 //        try {
        System.out.println("----- "+traitement.getIntervalle());
         NotificationImplement.sendNotification();
+        traitement.setUser(user);
             return  traitementService.ajouter(traitement,user.getId());
 
 //        } catch (Exception e) {

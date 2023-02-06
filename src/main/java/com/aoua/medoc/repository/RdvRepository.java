@@ -13,4 +13,5 @@ public interface RdvRepository extends JpaRepository <Rdv, Long> {
 
     List<Rdv> findByDateAndUser(LocalDate date, User user);
 
+
 }
