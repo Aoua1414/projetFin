@@ -31,7 +31,7 @@ public class TraitementController {
         this.traitementRepository = traitementRepository;
     }
 
-    //Afficher liste des traitements
+    //Afficher liste des traitements du jour d'un user
     @GetMapping(value = "/jour/{id}")
 
     public List<Traitement> afficher(@PathVariable("id") User user) {

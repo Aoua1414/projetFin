@@ -3,14 +3,12 @@ package com.aoua.medoc.controllers;
 import com.aoua.medoc.Service.RdvService;
 import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Rdv;
-import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.RdvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +33,9 @@ public class RdvController {
 
     //afficher par id
     @GetMapping("/parid/{id}")
-    public Optional<Rdv> afficherrdv(@PathVariable Long id){
-      return rdvRepository.findById(id);
+    public Rdv afficherrdv(@PathVariable Long id){
+
+        return rdvRepository.afficherparid(id);
     }
 
     //Ajouter rdv
@@ -64,6 +63,8 @@ public class RdvController {
     public Rdv modifier(@PathVariable Long id, @RequestBody Rdv rdv){
 //        rdvService.modifier(id, rdv);
         return rdvService.modifier(id, rdv );
+
+
     }
 
     //Suppression RDV

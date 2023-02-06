@@ -43,7 +43,7 @@ public class RdvImplement implements RdvService {
     public Rdv modifier(Long id, Rdv rdv) {
         return rdvRepository.findById(id)
                 .map(rdv1 -> {
-//                    rdv1.setHeure_rdv(rdv.getHeure_rdv());
+//
                     rdv1.setHeure(rdv.getHeure());
                     rdv1.setDate(rdv.getDate());
                     rdv1.setMotif(rdv.getMotif());
