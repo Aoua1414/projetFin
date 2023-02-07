@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins =  "http://localhost:8100", maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/api/traitement")
 public class TraitementController {
     @Autowired
@@ -51,6 +51,10 @@ public class TraitementController {
         }
 
         return todayTraitement;
+    }
+    @GetMapping("/traituserconn/{id_user}")
+    public List<Traitement> listertraitUserConnect(@PathVariable ("id_user") User user){
+        return traitementRepository.findByUser(user);
     }
 
 
