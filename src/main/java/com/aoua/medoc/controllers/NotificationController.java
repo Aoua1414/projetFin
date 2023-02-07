@@ -33,11 +33,7 @@ public class NotificationController {
         this.notificationRepository = notificationRepository;
         this.rdvRepository = rdvRepository;
         this.roleRepository = roleRepository;
-
     }
-
-    // essai de notif aek geek
-
 //    public void envoyermessage(long id_user, long id, boolean traitement) {
 //        User user = userRepository.findById(id_user).get();
 //
