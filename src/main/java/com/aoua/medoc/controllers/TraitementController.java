@@ -2,6 +2,8 @@ package com.aoua.medoc.controllers;
 
 import com.aoua.medoc.Service.TraitementService;
 import com.aoua.medoc.ServiceImplement.NotificationImplement;
+import com.aoua.medoc.models.Messages;
+import com.aoua.medoc.models.Rdv;
 import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.TraitementRepository;
@@ -67,7 +69,7 @@ public class TraitementController {
 
      //Ajouter traitement
     @PostMapping(value = "/ajouter/{id}")
-    public Object ajouter(@RequestBody Traitement traitement, @PathVariable("id") User user) {
+    public Messages ajouter(@RequestBody Traitement traitement, @PathVariable("id") User user) {
 //        try {
        System.out.println("----- "+traitement.getIntervalle());
         NotificationImplement.sendNotification();
@@ -144,5 +146,12 @@ public class TraitementController {
         }
 
         return traitedujour;
+    }
+
+
+    //afficher par id
+    @GetMapping("/traitparid/{id}")
+     public Traitement traitparid(@PathVariable Long id){
+        return  traitementRepository.traitparid(id);
     }
 }

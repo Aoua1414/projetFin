@@ -21,4 +21,6 @@ public interface RdvRepository extends JpaRepository <Rdv, Long> {
     Rdv afficherparid (@Param("id_rdv") Long id_rdv);
 //
 
+    //recuperer rdv par user
+    List<Rdv> findByUser(User user);
 }

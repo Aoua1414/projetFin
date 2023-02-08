@@ -3,6 +3,7 @@ package com.aoua.medoc.ServiceImplement;
 
 import com.aoua.medoc.Service.TraitementService;
 import com.aoua.medoc.controllers.NotificationController;
+import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Notification;
 import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.repository.NotificationRepository;
@@ -34,7 +35,7 @@ public class TraitementImplement  implements TraitementService {
     private RdvRepository rdvRepository;
 
     @Override
-    public String ajouter(Traitement traitement, long iduser) {
+    public Messages ajouter(Traitement traitement, long iduser) {
         //Recuperation de date debut et fin de traitement
 
         LocalDate debut=traitement.getDate_debut();
@@ -67,12 +68,15 @@ public class TraitementImplement  implements TraitementService {
 
 //            no.setMessage("prenez votre medicament");
 //            notificationRepository.save(no);
-            return "Traitement enregistré avec succès.";
-        }else
+           // return "Traitement enregistré avec succès.";
+            Messages messages = new Messages("Ajouté avec succès",true);
+            return messages;
+        }else {
 
-            return "Verifiez vos dates";
-
-
+//            return "Verifiez vos dates";
+            Messages messages = new Messages("Verifiez vos dates", true);
+            return messages;
+        }
             }
 
 
