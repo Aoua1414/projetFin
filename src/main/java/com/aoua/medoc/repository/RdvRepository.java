@@ -13,7 +13,12 @@ import java.util.List;
 @Repository
 public interface RdvRepository extends JpaRepository <Rdv, Long> {
 
+    // tous les rdv du jour dans notif
     List<Rdv> findByDateAndUser(LocalDate date, User user);
+
+  // les rdv du user connecté
+
+
 
 //    Rdv findById_rdv(Long id_user);
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,8 @@ public class JwtUtils {
 
   @Value("${bezkoder.app.jwtSecret}")
   private String jwtSecret;
-
+  @Value("${bezkoder.app.jwtCookieName}")
+  private String jwtCookie;
   @Value("${bezkoder.app.jwtExpirationMs}")
   private int jwtExpirationMs;
 
@@ -35,6 +37,11 @@ public class JwtUtils {
 
   public String getUserNameFromJwtToken(String token) {
     return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+  }
+// Pour supprimer les données de user qui se deconnecte
+  public ResponseCookie getCleanJwtCookie() {
+    ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+    return cookie;
   }
 
   public boolean validateJwtToken(String authToken) {
