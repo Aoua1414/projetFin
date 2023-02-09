@@ -18,8 +18,6 @@ public interface TraitementRepository extends JpaRepository <Traitement, Long> {
     List<Traitement> findByUser(User user);
 
 
-//    @Query(value = "SELECT rdv.* FROM rdv WHERE rdv.id_rdv=:id_rdv" , nativeQuery = true)
-//    Rdv afficherparid (@Param("id_rdv") Long id_rdv);
 
     @Query(value = "SELECT traitement.* FROM traitement WHERE traitement.id_traitement=:id_traitement", nativeQuery = true)
     Traitement traitparid (@Param("id_traitement") Long id_traitement);
