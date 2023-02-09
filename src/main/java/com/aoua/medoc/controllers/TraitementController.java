@@ -26,7 +26,7 @@ public class TraitementController {
     @Autowired
     private final TraitementRepository traitementRepository;
 
-
+//juste comme xa
     public TraitementController(TraitementService traitementService,
                                 TraitementRepository traitementRepository) {
         this.traitementService = traitementService;
