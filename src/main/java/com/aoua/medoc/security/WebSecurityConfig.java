@@ -91,6 +91,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .antMatchers("/rdv/**").permitAll()
             .antMatchers("/user/**").permitAll()
             .antMatchers("/pharmacien/**").permitAll()
+            .antMatchers("/pharmacien/ajouter/**").permitAll()
 
 
         .anyRequest().authenticated();

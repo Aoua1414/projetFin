@@ -6,6 +6,7 @@ import com.aoua.medoc.models.ERole;
 import com.aoua.medoc.models.Pharmacien;
 import com.aoua.medoc.models.Role;
 import com.aoua.medoc.models.User;
+import com.aoua.medoc.repository.PharmacienRepository;
 import com.aoua.medoc.repository.RoleRepository;
 import com.aoua.medoc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = {"http://localhost:4200/","http://localhost:8100/"}, maxAge = 3600, allowCredentials="true")
 @RequestMapping("/pharmacien")
 
-@CrossOrigin(origins = {"http://localhost:4200/", "http://localhost:8100/"}, maxAge = 3600, allowCredentials="true")
+
 @RestController
 public class PharmacienController {
     @Autowired
@@ -31,6 +34,8 @@ public class PharmacienController {
     public final PharmacienService pharmacienService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PharmacienRepository pharmacienRepository;
 
     public PharmacienController(PharmacienService pharmacienService) {
         this.pharmacienService = pharmacienService;
@@ -43,14 +48,17 @@ public class PharmacienController {
         return pharmacienService.afficher();
     }
     //Ajouter pharmacien
-    @PostMapping("/ajouter")
+    @PostMapping("/ajouter/{id}")
    // @PreAuthorize("hasRole('ADMIN')")
-    public Object ajouter(@RequestBody Pharmacien pharmacien ){
+    public Object ajouter(@RequestBody Pharmacien pharmacien, @PathVariable ("id") long id){
+   // pharmacienRepository.findByUser(userRepository.findById(id).get()).getUser().getId();
+pharmacien.setUser(userRepository.findById(id).get());
 
         try {
 
             pharmacienService.ajouter(pharmacien);
             System.out.println("nom "+pharmacien.getNom_prenom());
+            System.out.println("id user  "+userRepository.findById(id).get());
             return "Ajouté avec succès";
         } catch (HttpStatusCodeException httpStatusCodeException) {
             return "Non authorise";

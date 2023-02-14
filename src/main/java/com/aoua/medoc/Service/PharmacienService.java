@@ -1,6 +1,7 @@
 package com.aoua.medoc.Service;
 
 import com.aoua.medoc.models.Pharmacien;
+import com.aoua.medoc.models.User;
 
 import java.util.List;
 

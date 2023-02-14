@@ -3,12 +3,10 @@ package com.aoua.medoc.controllers;
 import com.aoua.medoc.Service.TraitementService;
 import com.aoua.medoc.ServiceImplement.NotificationImplement;
 import com.aoua.medoc.models.Messages;
-import com.aoua.medoc.models.Rdv;
 import com.aoua.medoc.models.Traitement;
 import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.TraitementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -83,13 +81,16 @@ public class TraitementController {
     }
 
     // Modification d'un traitement
-    @PutMapping(value = "/modifier/{nom_medoc}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PutMapping(value = "/modifier/{id}")
+//    @PreAuthorize("hasAuthority('USER')")
 
-    public String modifier(@PathVariable Long id , @RequestBody Traitement traitement) {
-          traitementService.modifier(id, traitement);
-          return "modifié avec succès ";
+    public Traitement modifier(@PathVariable Long id , @RequestBody Traitement traitement) {
+//          traitementService.modifier(id, traitement);
+
+          return traitementService.modifier(id, traitement);
     }
+
+
 
     /*
     @GetMapping(value = "/filtrertraitementParDate")
