@@ -101,4 +101,9 @@ public class RdvController {
 
         return rdvList;
     }
+
+    //Affichage des rdv du user connecté
+
+
+
 }

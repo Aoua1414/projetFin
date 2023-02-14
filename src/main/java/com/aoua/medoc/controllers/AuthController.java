@@ -14,6 +14,8 @@ import com.aoua.medoc.payload.request.SignupRequest;
 import com.aoua.medoc.payload.response.JwtResponse;
 import com.aoua.medoc.payload.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -132,4 +134,13 @@ public class AuthController {
 
     return ResponseEntity.ok(new MessageResponse("User bien enregistré!"));
   }
+
+
+  @PostMapping("/signout")
+  public ResponseEntity<?> logoutUser() {
+    ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .body(new MessageResponse("Vous avez été déconnecté!"));
+  }
+
 }
