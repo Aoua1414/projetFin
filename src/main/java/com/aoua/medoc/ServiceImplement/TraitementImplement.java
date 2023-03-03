@@ -6,6 +6,7 @@ import com.aoua.medoc.controllers.NotificationController;
 import com.aoua.medoc.models.Messages;
 import com.aoua.medoc.models.Notification;
 import com.aoua.medoc.models.Traitement;
+import com.aoua.medoc.models.User;
 import com.aoua.medoc.repository.NotificationRepository;
 import com.aoua.medoc.repository.RdvRepository;
 import com.aoua.medoc.repository.TraitementRepository;
@@ -111,6 +112,17 @@ public class TraitementImplement  implements TraitementService {
     public List<Traitement> afficher() {
         return traitementRepository.findAll();
     }
+
+    @Override
+    public List<Traitement> listerParUser(Long Id) {
+        User user=userRepository.findById(Id).get();
+
+        return traitementRepository.findByUser(user);
+
+
+    }
+
+
 
 
 

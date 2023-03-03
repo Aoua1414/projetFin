@@ -93,6 +93,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .antMatchers("/pharmacien/**").permitAll()
             .antMatchers("/pharmacien/ajouter/**").permitAll()
 
+            .antMatchers("/**").permitAll()
+
 
         .anyRequest().authenticated();
     http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());

@@ -15,6 +15,7 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String recipientToken;
     private String titre;
     private String message;
     private LocalDate date;

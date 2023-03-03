@@ -152,7 +152,18 @@ public class TraitementController {
 
     //afficher par id
     @GetMapping("/traitparid/{id}")
-     public Traitement traitparid(@PathVariable Long id){
+
+    public Traitement traitparid(@PathVariable Long id){
         return  traitementRepository.traitparid(id);
     }
+
+    @GetMapping("/toutTraitParId/{id}")
+    public List<Traitement> listerParUser(@PathVariable Long id){
+    return traitementService.listerParUser(id);
+    }
+
+
+
 }
+
+

@@ -1,28 +1,51 @@
 package com.aoua.medoc.controllers;
 
 
+import com.aoua.medoc.MyHandler;
+import com.aoua.medoc.ServiceImplement.FirebaseMessagingService;
+import com.aoua.medoc.ServiceImplement.NotificationMessaging;
 import com.aoua.medoc.models.*;
 import com.aoua.medoc.repository.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/notification")
-public class NotificationController {
-    private final UserRepository userRepository;
-    private final TraitementRepository traitementRepository;
-    private final NotificationRepository notificationRepository;
-    private final RdvRepository rdvRepository;
-    private final RoleRepository roleRepository;
 
+public class NotificationController {
+
+    @Autowired
+    FirebaseMessagingService firebaseMessagingService;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  TraitementRepository traitementRepository;
+    @Autowired
+    private  NotificationRepository notificationRepository;
+    @Autowired
+    private  RdvRepository rdvRepository;
+    @Autowired
+    private  RoleRepository roleRepository;
+    @Autowired
+    private MyHandler myHandler;
+
+    public NotificationController() {
+        // Constructeur sans argument
+    }
+
+    @PostMapping("/sendnotif")
+    public  String sendNotification(@RequestBody NotificationMessaging notification){
+        return firebaseMessagingService.sendNotification(notification);
+    }
     public NotificationController(UserRepository userRepository,
                                   TraitementRepository traitementRepository,
                                   NotificationRepository notificationRepository,
@@ -33,6 +56,10 @@ public class NotificationController {
         this.notificationRepository = notificationRepository;
         this.rdvRepository = rdvRepository;
         this.roleRepository = roleRepository;
+
+
+        //push/////////
+        //this.webSocketHandler = webSocketHandler;
     }
 //    public void envoyermessage(long id_user, long id, boolean traitement) {
 //        User user = userRepository.findById(id_user).get();
@@ -75,7 +102,7 @@ public class NotificationController {
 //    }
 
     @Scheduled(fixedDelay = 1000)
-    public void EnvoyerNotifMedi(){
+    public void EnvoyerNotifMedi() throws IOException {
 
         //recuperation de tout les traitement
         //List<Traitement> allTraitement=traitementRepository.findAll();
@@ -111,6 +138,8 @@ public class NotificationController {
                                     notificationRepository.save(notification);
                                     System.out.println("notification genere");
 
+                                    //=============== Ajout de message ===============
+                                    myHandler.pushMessage(notification.getMessage());
                                 }
                             }
 
@@ -125,6 +154,23 @@ public class NotificationController {
         }
     }
 
+
+
+// poooooooooooouuuuuuuuuuurrrrrrrrrrrrr push
+  //  private final MyWebSocketHandler webSocketHandler;
+    public NotificationController(UserRepository userRepository, TraitementRepository traitementRepository){
+        this.userRepository = userRepository;
+        this.traitementRepository = traitementRepository;
+    //    this.webSocketHandler=webSocketHandler;
+    }
+   /* @PostMapping("/send-message")
+    public void sendMessage(@RequestBody String message) throws IOException {
+        webSocketHandler.sendMessageToAllSessions(message);
+    }*/
+ //////fin de push
+
+
+
     @Scheduled(fixedDelay = 60000)
     public void EnvoyerNotifRdv(){
         List<User> userList=userRepository.findAll();
@@ -137,13 +183,13 @@ public class NotificationController {
             for (Rdv rdv :rdvList) {
                 LocalTime nowTime=LocalTime.of(LocalTime.now().getHour(),LocalTime.now().getMinute());
 
-//    l'envoi des notif de  rdv
+        //    l'envoi des notif de  rdv
 
                 if (rdv.getHeure().equals(nowTime)){
                     Notification notification=new Notification();
                     notification.setUser(u);
                     notification.setTitre("titre");
-                    notification.setMessage(" Votre rdv : "+rdv.getMotif()+" "+rdv.getService_medical()+""+rdv.getHeure());
+                    notification.setMessage(" Votre rendez-vous : "+rdv.getMotif()+" "+rdv.getService_medical()+" "+rdv.getHeure());
                     notification.setDate(today);
                     notification.setHeure(nowTime);
                     notification.setRdv(rdv);

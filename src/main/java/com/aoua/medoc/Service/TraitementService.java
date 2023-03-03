@@ -19,6 +19,8 @@ public interface TraitementService{
 
     List<Traitement> afficher();
 
+    List<Traitement> listerParUser(Long Id);
+
 
 
 
