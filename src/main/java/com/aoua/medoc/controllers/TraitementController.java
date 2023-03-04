@@ -53,8 +53,8 @@ public class TraitementController {
         return todayTraitement;
     }
     @GetMapping("/traituserconn/{id_user}")
-    public List<Traitement> listertraitUserConnect(@PathVariable ("id_user") User user){
-        return traitementRepository.findByUser(user);
+    public List<Traitement> listertraitUserConnect(@PathVariable ("id_user") User id_user){
+        return traitementRepository.findByUser(id_user);
     }
 
 
@@ -66,13 +66,13 @@ public class TraitementController {
 
 
      //Ajouter traitement
-    @PostMapping(value = "/ajouter/{id}")
-    public Messages ajouter(@RequestBody Traitement traitement, @PathVariable("id") User user) {
+    @PostMapping(value = "/ajouter/{user_id}")
+    public Messages ajouter(@RequestBody Traitement traitement, @PathVariable("user_id") User user_id) {
 //        try {
        System.out.println("----- "+traitement.getIntervalle());
         NotificationImplement.sendNotification();
-        traitement.setUser(user);
-            return  traitementService.ajouter(traitement,user.getId());
+        traitement.setUser(user_id);
+            return  traitementService.ajouter(traitement,user_id.getId());
 
 //        } catch (Exception e) {
 //

@@ -22,7 +22,7 @@ public interface RdvRepository extends JpaRepository <Rdv, Long> {
 
 //    Rdv findById_rdv(Long id_user);
 
-    @Query(value = "SELECT rdv.* FROM rdv WHERE rdv.id_rdv=:id_rdv" , nativeQuery = true)
+    @Query(value = "SELECT rdv.* FROM rdv WHERE rdv.id_rdv=:id_rdv " , nativeQuery = true)
     Rdv afficherparid (@Param("id_rdv") Long id_rdv);
 //
 
