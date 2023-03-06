@@ -104,10 +104,6 @@ public class NotificationController {
     @Scheduled(fixedDelay = 1000)
     public void EnvoyerNotifMedi() throws IOException {
 
-        //recuperation de tout les traitement
-        //List<Traitement> allTraitement=traitementRepository.findAll();
-        //recuperation des utilisateurs avec le role user
-        ///Role roleUser=roleRepository.findByName(ERole.ROLE_USER);
         List<User> userList=userRepository.findAll();
 
         LocalDate today= LocalDate.now();
